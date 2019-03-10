@@ -30,7 +30,7 @@ class RunManager():
 			"modRun": modRun
 		}
 
-	def appendToInput(self, name, list):
+	def appendToInput(self, name):
 		startIndex = len(self.inputTensors)
 		self.inputTensors+=self.groups[name]["inList"]
 		self.indexList.append({
@@ -45,7 +45,7 @@ class RunManager():
 	def buildInputFromNames(self, names):
 		self.clearInput()
 		for k in names:
-			self.appendToInput(k, self.groups[k]["inList"])
+			self.appendToInput(k)
 
 	def buildInputFromEnabled(self):
 		self.clearInput()
@@ -54,7 +54,7 @@ class RunManager():
 			if g["enabled"] != True:
 				continue
 
-			self.appendToInput(k, g["inList"])
+			self.appendToInput(k)
 
 	def buildInputMod(self, counter):
 		self.clearInput()
@@ -64,7 +64,7 @@ class RunManager():
 			if m<=0 or g["enabled"] != True or counter % m != 0:
 				continue
 
-			self.appendToInput(k, g["inList"])
+			self.appendToInput(k)
 
 	def runAndMerge(self, feed_dict=None, options=None, run_metadata=None):
 		try:
